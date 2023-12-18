@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #waveText {
+            font-size: 2em;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        #waveText span {
+            color: #3498db; /* Set your desired color */
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(1em);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="wave-text" id="waveText"><h1>World Link
+    </h1>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+const text = document.getElementById("waveText").textContent;
+const waveText = document.getElementById("waveText");
+
+// Clear existing content
+waveText.innerHTML = " "; 
+
+function showCharByChar(index) {
+if (index < text.length) {
+    const span = document.createElement("span");
+    span.textContent = text[index];
+    waveText.appendChild(span);
+    
+    // Trigger reflow
+    span.offsetHeight;
+
+    span.style.opacity = 1;
+    span.style.transform = "translateY(0)";
+
+    index++;
+    setTimeout(() => showCharByChar(index), 100);
+}
+}
+
+showCharByChar(0);
+});
+</script>
+</body>
+</html>
+   
